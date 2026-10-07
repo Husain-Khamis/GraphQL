@@ -1,5 +1,6 @@
 const GRAPHQL_URL = 'https://learn.reboot01.com/api/graphql-engine/v1/graphql'
-const XP_EVENT_ID = 1829 // /bahrain/bh-module
+// Every cohort has its own module event (different id), but they all share this path
+const XP_EVENT_PATH = '/bahrain/bh-module'
 
 function logout() {
     localStorage.removeItem('jwt')
@@ -60,16 +61,16 @@ async function getUser() {
 // ARGUMENTS query (where + order_by + variables)
 async function getXPOverTime() {
     const data = await graphql(
-        `query ($type: String!, $eventId: Int!) {
+        `query ($type: String!, $eventPath: String!) {
             transaction(
-                where: { type: { _eq: $type }, eventId: { _eq: $eventId } }
+                where: { type: { _eq: $type }, event: { path: { _eq: $eventPath } } }
                 order_by: { createdAt: asc }
             ) {
                 amount
                 createdAt
             }
         }`,
-        { type: 'xp', eventId: XP_EVENT_ID }
+        { type: 'xp', eventPath: XP_EVENT_PATH }
     )
     return data.transaction.map((t) => ({ date: t.createdAt, amount: t.amount }))
 }
