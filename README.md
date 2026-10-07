@@ -28,7 +28,7 @@ Then open the login page in your browser.
 ## Structure
 
 ```
-login.html      login page
+index.html      login page
 profile.html    profile page
 style.css       theme
 assets/         sounds and images

@@ -24,7 +24,7 @@ Solo project. Vanilla JS, two pages (login page + profile page, not a SPA), Meta
 
 ```
 /
-├── login.html       # login page
+├── index.html       # login page
 ├── profile.html     # profile page
 ├── style.css
 ├── assets/          # sounds (.mp3) and contact images (.png)
@@ -44,9 +44,9 @@ Solo project. Vanilla JS, two pages (login page + profile page, not a SPA), Meta
 - [✔] Store JWT (`localStorage`)
 - [✔] Show error message on failed login
 - [✔] On successful login: redirect to `profile.html`
-- [✔] Logout button: clear JWT, redirect to `login.html`
-- [✔] Route guard on `profile.html`: no JWT -> redirect to `login.html`
-- [✔] If JWT exists on `login.html`, redirect to `profile.html`
+- [✔] Logout button: clear JWT, redirect to `index.html`
+- [✔] Route guard on `profile.html`: no JWT -> redirect to `index.html`
+- [✔] If JWT exists on `index.html`, redirect to `profile.html`
 - [✔] Test with both username and email
 
 ### 2. First query

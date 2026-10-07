@@ -3,7 +3,7 @@ const XP_EVENT_ID = 1829 // /bahrain/bh-module
 
 function logout() {
     localStorage.removeItem('jwt')
-    window.location.replace('login.html')
+    window.location.replace('index.html')
 }
 
 function decodeJWT(token) {
