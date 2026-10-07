@@ -39,3 +39,6 @@ js/
   profile.js    contacts and profile data
   graphs.js     SVG charts
 ```
+
+<sub><sup>Hint:</sup></sub>
+<sub><sup><<><>><^^</sup></sub>

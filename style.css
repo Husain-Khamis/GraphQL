@@ -485,6 +485,41 @@ html,
 
 .denied-box .btn { margin-top: 16px; }
 
+/* Easter egg video */
+.egg {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(2, 10, 4, 0.9);
+    transition: opacity 1.2s ease;
+}
+
+.egg[hidden] { display: none; }
+.egg.fading { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .egg { transition: none; }
+}
+
+.egg-box {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+    width: 100%;
+    max-width: 720px;
+    padding: 12px;
+}
+
+.egg-box video {
+    display: block;
+    width: 100%;
+    max-height: 70dvh;
+    background: #000;
+}
+
 /* Small screens */
 @media (max-width: 700px) {
     .screen { grid-template-columns: 1fr 1fr; }

@@ -7,7 +7,7 @@ const Codec = (() => {
     const soundOn = () => localStorage.getItem(KEY) !== 'off'
 
     const sounds = {}
-    ;['btnClick', 'loggingIn', 'login', 'logout', 'switching'].forEach((name) => {
+    ;['btnClick', 'loggingIn', 'login', 'logout'].forEach((name) => {
         const a = new Audio(`assets/${name}.mp3`)
         a.preload = 'auto'
         a.volume = VOLUME

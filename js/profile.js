@@ -108,7 +108,7 @@ function setupContacts(contacts, userId) {
         return b
     })
 
-    function select(i, switchSound = false) {
+    function select(i, clickSound = false) {
         const n = (i + contacts.length) % contacts.length
         if (n === current) return
         current = n
@@ -125,7 +125,7 @@ function setupContacts(contacts, userId) {
         void frame.offsetWidth
         frame.classList.add('tuning')
 
-        if (switchSound) Codec.play('switching')
+        if (clickSound) Codec.play('btnClick')
 
         dialogue.replaceChildren(...contacts[n].rows())
         dialogue.scrollTop = 0
@@ -139,12 +139,66 @@ function setupContacts(contacts, userId) {
     document.getElementById('prevBtn').addEventListener('click', () => select(current - 1))
     document.getElementById('nextBtn').addEventListener('click', () => select(current + 1))
     document.addEventListener('keydown', (e) => {
+        if (eggOpen()) return
         if (e.key === 'ArrowLeft') select(current - 1, true)
         if (e.key === 'ArrowRight') select(current + 1, true)
     })
 
     select(0)
 }
+
+// Easter egg: this arrow sequence plays a video
+const EGG_SEQUENCE = [
+    'ArrowLeft', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+    'ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowUp',
+]
+const egg = document.getElementById('egg')
+const eggVideo = document.getElementById('eggVideo')
+const eggOpen = () => !egg.hidden
+const EGG_FADE_MS = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 1200
+let eggFadeTimer
+
+function openEgg() {
+    clearTimeout(eggFadeTimer)
+    egg.classList.remove('fading')
+    egg.hidden = false
+    eggVideo.muted = localStorage.getItem('codecSound') === 'off'
+    eggVideo.currentTime = 0
+    eggVideo.play().catch(() => {})
+}
+
+function closeEgg() {
+    clearTimeout(eggFadeTimer)
+    eggVideo.pause()
+    egg.classList.remove('fading')
+    egg.hidden = true
+}
+
+// When the video ends on its own, fade the overlay out before hiding it
+function fadeOutEgg() {
+    egg.classList.add('fading')
+    eggFadeTimer = setTimeout(closeEgg, EGG_FADE_MS)
+}
+
+let eggKeys = []
+document.addEventListener('keydown', (e) => {
+    if (eggOpen()) {
+        if (e.key === 'Escape') closeEgg()
+        return
+    }
+    if (!e.key.startsWith('Arrow')) return
+    eggKeys = [...eggKeys, e.key].slice(-EGG_SEQUENCE.length)
+    if (eggKeys.join() === EGG_SEQUENCE.join()) {
+        e.preventDefault()
+        eggKeys = []
+        openEgg()
+    }
+})
+eggVideo.addEventListener('ended', fadeOutEgg)
+egg.addEventListener('click', (e) => {
+    if (e.target === egg) closeEgg()
+})
+document.getElementById('eggClose').addEventListener('click', closeEgg)
 
 // Charts are drawn at the container's real width, and redrawn when that width changes
 function drawCharts(xpData, skills) {
