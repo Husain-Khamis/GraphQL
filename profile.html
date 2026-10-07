@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Profile</title>
+        <link rel="icon" href="data:,">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+            <symbol id="silhouette" viewBox="0 0 100 120">
+                <circle cx="50" cy="38" r="22" fill="currentColor"/>
+                <path d="M8 120c0-34 20-48 42-48s42 14 42 48z" fill="currentColor"/>
+            </symbol>
+        </svg>
+
+        <main id="denied" class="denied" hidden>
+            <div class="frame denied-box" role="alert">
+                <p class="denied-code">ERROR 401</p>
+                <h1>UNAUTHORIZED</h1>
+                <p id="deniedMsg">NO SESSION TOKEN FOUND.</p>
+                <p>ACCESS TO THIS FREQUENCY IS DENIED.</p>
+                <a href="login.html" class="btn">RETURN TO LOGIN</a>
+            </div>
+        </main>
+
+        <div class="codec" id="app" hidden>
+            <header class="topbar">
+                <span>CODEC // PROFILE</span>
+                <span>
+                    <button id="soundBtn" type="button"></button>
+                    <button id="logoutBtn" type="button" data-sfx="custom">LOGOUT</button>
+                </span>
+            </header>
+
+            <p id="status" role="status"></p>
+
+            <section class="screen" aria-label="Codec">
+                <div class="frame" id="selfFrame">
+                    <img src="assets/user.png" alt="">
+                    <p class="name" id="selfName">---</p>
+                </div>
+
+                <div class="tuner">
+                    <p class="freq-label">TUNE</p>
+                    <p class="freq" id="freq">---.--</p>
+                    <div class="wave" id="wave" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="tuner-buttons">
+                        <button id="prevBtn" type="button" aria-label="Previous contact">&#9664;</button>
+                        <button id="nextBtn" type="button" aria-label="Next contact">&#9654;</button>
+                    </div>
+                </div>
+
+                <div class="frame" id="contactFrame">
+                    <img id="contactImg" alt="">
+                    <p class="name" id="contactName">---</p>
+                </div>
+            </section>
+
+            <nav id="contacts" aria-label="Contacts"></nav>
+
+            <div id="dialogue" class="dialogue" role="region" aria-label="Transmission" tabindex="0"></div>
+
+            <section id="stats" class="panel">
+                <h2>STATISTICS</h2>
+                <h3>XP OVER TIME</h3>
+                <div id="xpChart"></div>
+                <h3>SKILLS</h3>
+                <div id="skillsChart"></div>
+            </section>
+        </div>
+
+        <script src="js/api.js"></script>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="js/graphs.js"></script>
+        <script src="js/codec.js"></script>
+        <script src="js/profile.js"></script>
+    </body>
+</html>

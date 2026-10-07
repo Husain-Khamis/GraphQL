@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login</title>
+        <meta name="description" content="Login to your profile">
+        <link rel="icon" href="data:,">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+            <symbol id="silhouette" viewBox="0 0 100 120">
+                <circle cx="50" cy="38" r="22" fill="currentColor"/>
+                <path d="M8 120c0-34 20-48 42-48s42 14 42 48z" fill="currentColor"/>
+            </symbol>
+        </svg>
+
+        <main class="codec">
+            <header class="topbar">
+                <span>CODEC // ACCESS TERMINAL</span>
+                <span><button id="soundBtn" type="button"></button></span>
+            </header>
+
+            <section class="screen login-screen">
+                <div class="frame">
+                    <svg viewBox="0 0 100 120" aria-hidden="true"><use href="#silhouette"/></svg>
+                    <p class="name">UNKNOWN</p>
+                </div>
+
+                <form id="loginForm" class="frame form" novalidate>
+                    <label for="idInput" class="labels">Username or Email</label>
+                    <input
+                        type="text"
+                        id="idInput"
+                        name="idInput"
+                        class="inputs"
+                        autocomplete="username"
+                        autocapitalize="none"
+                        spellcheck="false"
+                        maxlength="254"
+                        aria-describedby="error"
+                        required
+                    >
+
+                    <label for="passwordInput" class="labels">Password</label>
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        name="passwordInput"
+                        class="inputs"
+                        autocomplete="current-password"
+                        maxlength="128"
+                        aria-describedby="error"
+                        required
+                    >
+
+                    <p id="error" role="alert"></p>
+
+                    <button type="submit" id="loginBtn" data-sfx="custom">LOGIN</button>
+                </form>
+            </section>
+        </main>
+
+        <div id="calling" class="calling" role="status" hidden>
+            <p>CALLING<span class="dots"></span></p>
+        </div>
+
+        <script src="js/codec.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/auth.js"></script>
+    </body>
+</html>
